@@ -4,6 +4,7 @@ namespace Siestacat\SymfonyJsonErrorResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\FormErrorIterator;
 
 /**
  * @package Siestacat\SymfonyJsonErrorResponse
@@ -26,5 +27,13 @@ abstract class JsonErrorResponse extends AbstractController
         $json['success'] = false;
 
         return $this->json($json)->setStatusCode(500);
+    }
+
+    protected function json_error_form(FormErrorIterator $form_errors):JsonResponse
+    {
+        foreach($form_errors as $form_error)
+        {
+            return $this->json_error_message($form_error->getMessage());
+        }
     }
 }
