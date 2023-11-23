@@ -29,11 +29,11 @@ abstract class JsonErrorResponse extends AbstractController
         return $this->json($json)->setStatusCode(500);
     }
 
-    protected function json_error_form(FormErrorIterator $form_errors):JsonResponse
+    protected function json_error_form(FormErrorIterator $form_errors, array $json = []):JsonResponse
     {
         foreach($form_errors as $form_error)
         {
-            return $this->json_error_message($form_error->getMessage());
+            return $this->json_error_message($form_error->getMessage(), $json);
         }
     }
 }
