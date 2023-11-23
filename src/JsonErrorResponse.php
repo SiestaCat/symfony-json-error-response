@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormErrorIterator;
  */
 abstract class JsonErrorResponse extends AbstractController
 {
-    protected function json_error(\Exception $e, ?LoggerInterface $logger = null, array $json):JsonResponse
+    protected function json_error(\Exception $e, ?LoggerInterface $logger = null, array $json = []):JsonResponse
     {
         if($logger !== null) $logger->error($e->getMessage());
 
